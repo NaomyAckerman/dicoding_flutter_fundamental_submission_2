@@ -7,6 +7,7 @@ import 'package:submission_proyek2/data/api/api_service.dart';
 import 'package:submission_proyek2/data/model/restaurant_detail.dart';
 import 'package:submission_proyek2/data/model/restaurant_detail_argument.dart';
 import 'package:submission_proyek2/provider/restaurant_provider.dart';
+import 'package:submission_proyek2/ui/review_page.dart';
 import 'package:submission_proyek2/ui/search_page.dart';
 import 'package:submission_proyek2/widgets/exception_widget.dart';
 
@@ -59,6 +60,27 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     ];
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: secondaryColor,
+        tooltip: 'Add Review',
+        onPressed: () => Navigator.pushNamed(
+          context,
+          ReviewPage.routeName,
+          arguments: RestaruantDetailArgument(
+            restaurant: widget.arguments.restaurant,
+            pictureTag: widget.arguments.pictureTag,
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        mini: true,
+        child: const Icon(
+          Icons.add_comment,
+          color: Colors.white,
+          size: 20,
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (context, isScrolled) {
           return [

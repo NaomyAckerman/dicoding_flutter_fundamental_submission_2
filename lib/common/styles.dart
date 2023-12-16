@@ -22,9 +22,11 @@ const AppBarTheme cAppBarTheme = AppBarTheme(
 
 ElevatedButtonThemeData cElevatedButtonTheme = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
+    minimumSize: const Size.fromHeight(50),
     backgroundColor: secondaryColor,
     foregroundColor: Colors.white,
     textStyle: const TextStyle(),
+    shadowColor: Colors.transparent,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(7),
     ),

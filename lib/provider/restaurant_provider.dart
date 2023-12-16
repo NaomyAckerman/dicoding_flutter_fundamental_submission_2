@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:submission_proyek2/data/api/api_service.dart';
 import 'package:submission_proyek2/data/model/restaurant_detail_result.dart';
 import 'package:submission_proyek2/data/model/restaurant_list_result.dart';
+import 'package:submission_proyek2/data/model/restaurant_review_body.dart';
 import 'package:submission_proyek2/data/model/restaurant_search_result.dart';
 
 enum ResultState { loading, noData, hasData, error }
@@ -94,5 +95,27 @@ class RestaurantProvider extends ChangeNotifier {
       _message = 'No Connection';
       notifyListeners();
     }
+  }
+
+  Future<String> addRestaurantReview(RestaurantReviewBody body) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final result = await apiService.restaurantAddReview(body);
+      if (result.error) {
+        _state = ResultState.noData;
+        _message = 'Fail Add Review';
+        notifyListeners();
+      } else {
+        _state = ResultState.hasData;
+        _message = "Successfully Added a Review";
+        notifyListeners();
+      }
+    } catch (e) {
+      _state = ResultState.error;
+      _message = 'No Connection';
+      notifyListeners();
+    }
+    return _message;
   }
 }

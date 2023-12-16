@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:submission_proyek2/data/model/restaurant_detail_result.dart';
 import 'package:submission_proyek2/data/model/restaurant_list_result.dart';
+import 'package:submission_proyek2/data/model/restaurant_review_body.dart';
+import 'package:submission_proyek2/data/model/restaurant_review_result.dart';
 import 'package:submission_proyek2/data/model/restaurant_search_result.dart';
 
 class ApiService {
@@ -41,6 +43,17 @@ class ApiService {
       return RestaurantSearchResult.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load restaurant list');
+    }
+  }
+
+  Future<RestaurantReviewResult> restaurantAddReview(
+      RestaurantReviewBody body) async {
+    final response =
+        await http.post(Uri.parse("${_baseUrl}review"), body: body.toJson());
+    if (response.statusCode == 201) {
+      return RestaurantReviewResult.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to add review');
     }
   }
 }

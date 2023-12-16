@@ -7,6 +7,7 @@ import 'package:submission_proyek2/provider/restaurant_provider.dart';
 import 'package:submission_proyek2/ui/home_page.dart';
 import 'package:submission_proyek2/ui/restaurant_detail_page.dart';
 import 'package:submission_proyek2/ui/restaurant_list_page.dart';
+import 'package:submission_proyek2/ui/review_page.dart';
 import 'package:submission_proyek2/ui/search_page.dart';
 import 'package:submission_proyek2/ui/splash_page.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         textButtonTheme: cTextButtonTheme,
         useMaterial3: true,
       ),
-      initialRoute: HomePage.routeName,
+      initialRoute: SplashPage.routeName,
       routes: {
         SplashPage.routeName: (context) => const SplashPage(),
         HomePage.routeName: (context) => const HomePage(),
@@ -47,6 +48,13 @@ class MyApp extends StatelessWidget {
         SearchPage.routeName: (context) => ChangeNotifierProvider(
             create: (context) => RestaurantProvider(apiService: ApiService()),
             child: const SearchPage()),
+        ReviewPage.routeName: (context) => ChangeNotifierProvider(
+              create: (context) => RestaurantProvider(apiService: ApiService()),
+              child: ReviewPage(
+                arguments: ModalRoute.of(context)?.settings.arguments
+                    as RestaruantDetailArgument,
+              ),
+            ),
       },
     );
   }

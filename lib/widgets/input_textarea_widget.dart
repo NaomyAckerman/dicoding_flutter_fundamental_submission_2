@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:submission_proyek2/common/styles.dart';
 
-class InputWidget extends StatelessWidget {
-  const InputWidget(
-      {super.key,
-      this.controller,
-      this.onEditingComplete,
-      this.textInputAction,
-      required this.hintText,
-      this.keyboardType,
-      this.validator,
-      this.autovalidateMode,
-      this.errorText,
-      this.initialValue});
+class InputTextareaWidget extends StatelessWidget {
+  const InputTextareaWidget({
+    super.key,
+    this.controller,
+    this.onEditingComplete,
+    this.textInputAction,
+    required this.hintText,
+    this.minLines,
+    this.validator,
+    this.autovalidateMode,
+    this.errorText,
+    this.initialValue,
+  });
 
   final TextEditingController? controller;
   final void Function()? onEditingComplete;
   final TextInputAction? textInputAction;
-  final TextInputType? keyboardType;
   final String hintText;
   final String? errorText;
   final String? initialValue;
+  final int? minLines;
   final String? Function(String?)? validator;
   final AutovalidateMode? autovalidateMode;
 
@@ -42,7 +43,9 @@ class InputWidget extends StatelessWidget {
         initialValue: initialValue,
         onEditingComplete: onEditingComplete,
         textInputAction: textInputAction,
-        keyboardType: keyboardType,
+        minLines: minLines,
+        maxLines: null,
+        keyboardType: TextInputType.multiline,
         validator: validator,
         autovalidateMode: autovalidateMode,
         decoration: InputDecoration(

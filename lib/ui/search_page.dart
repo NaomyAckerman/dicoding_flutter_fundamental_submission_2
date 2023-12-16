@@ -36,8 +36,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Page"),
-        foregroundColor: Colors.white,
+        title: const Text("Search Restaurant"),
+        titleSpacing: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(
