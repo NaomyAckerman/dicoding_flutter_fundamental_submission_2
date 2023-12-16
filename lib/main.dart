@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:submission_proyek2/common/styles.dart';
 import 'package:submission_proyek2/data/api/api_service.dart';
-import 'package:submission_proyek2/data/model/restaurant.dart';
+import 'package:submission_proyek2/data/model/restaurant_detail_argument.dart';
 import 'package:submission_proyek2/provider/restaurant_provider.dart';
-import 'package:submission_proyek2/ui/no_connection_page.dart';
+import 'package:submission_proyek2/ui/home_page.dart';
 import 'package:submission_proyek2/ui/restaurant_detail_page.dart';
 import 'package:submission_proyek2/ui/restaurant_list_page.dart';
+import 'package:submission_proyek2/ui/search_page.dart';
+import 'package:submission_proyek2/ui/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,16 +32,21 @@ class MyApp extends StatelessWidget {
         textButtonTheme: cTextButtonTheme,
         useMaterial3: true,
       ),
-      initialRoute: RestaurantListPage.routeName,
+      initialRoute: HomePage.routeName,
       routes: {
-        NoConnectionPage.routeName: (context) => const NoConnectionPage(),
-        RestaurantListPage.routeName: (context) => ChangeNotifierProvider(
-            create: (_) => RestaurantProvider(apiService: ApiService()),
-            child: const RestaurantListPage()),
-        RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
-              restaurant:
-                  ModalRoute.of(context)?.settings.arguments as Restaurant,
-            )
+        SplashPage.routeName: (context) => const SplashPage(),
+        HomePage.routeName: (context) => const HomePage(),
+        RestaurantListPage.routeName: (context) => const RestaurantListPage(),
+        RestaurantDetailPage.routeName: (context) => ChangeNotifierProvider(
+              create: (context) => RestaurantProvider(apiService: ApiService()),
+              child: RestaurantDetailPage(
+                arguments: ModalRoute.of(context)?.settings.arguments
+                    as RestaruantDetailArgument,
+              ),
+            ),
+        SearchPage.routeName: (context) => ChangeNotifierProvider(
+            create: (context) => RestaurantProvider(apiService: ApiService()),
+            child: const SearchPage()),
       },
     );
   }
